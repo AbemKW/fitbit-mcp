@@ -38,7 +38,9 @@ def _client_secrets_path() -> Path:
     env_path = os.environ.get("FITBIT_MCP_CLIENT_SECRETS")
     if env_path:
         return Path(env_path)
-    return Path(__file__).resolve().parents[2] / "client_secret.json"
+    # cwd, not the installed package location — this must work when run via
+    # `uvx --from git+...` too, where there's no local checkout to sit next to.
+    return Path.cwd() / "client_secret.json"
 
 
 def _load_client_config() -> dict:

@@ -10,6 +10,8 @@ keywords = ["mcp", "model-context-protocol", "fitbit", "google-health", "health"
 classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
     "mcp>=2.0",
@@ -17,6 +19,15 @@ dependencies = [
     "requests>=2.32",
     "keyring>=25.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/AbemKW/fitbit-mcp"
+Repository = "https://github.com/AbemKW/fitbit-mcp"
+Issues = "https://github.com/AbemKW/fitbit-mcp/issues"
+
+[project.scripts]
+fitbit-mcp = "fitbit_mcp.server:main"
+fitbit-mcp-authorize = "fitbit_mcp.authorize:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
