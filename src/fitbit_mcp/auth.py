@@ -25,6 +25,9 @@ SCOPES = [
     "https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly",
     "https://www.googleapis.com/auth/googlehealth.sleep.readonly",
     "https://www.googleapis.com/auth/googlehealth.profile.readonly",
+    # Required for pairedDevices.list — confirmed via live testing that device
+    # data sits behind settings, not the health-data scopes above.
+    "https://www.googleapis.com/auth/googlehealth.settings.readonly",
 ]
 
 
