@@ -7,3 +7,4 @@ __pycache__/
 # OAuth client credentials downloaded from Google Cloud Console — never commit
 client_secret*.json
 .env
+TASKS.md
