@@ -6,13 +6,7 @@ from ..app import mcp
 _RESPIRATORY_SPO2_TYPES = [
     models.OXYGEN_SATURATION,
     models.DAILY_OXYGEN_SATURATION,
-    models.RESPIRATORY_RATE,
     models.DAILY_RESPIRATORY_RATE,
-]
-
-_SKIN_TEMPERATURE_TYPES = [
-    models.SKIN_TEMPERATURE,
-    models.DAILY_SLEEP_TEMPERATURE_DERIVATIONS,
 ]
 
 _FITNESS_LEVEL_TYPES = [
@@ -29,17 +23,18 @@ def get_respiratory_and_spo2(date: str) -> dict:
     Args:
         date: ISO date, e.g. "2026-09-03".
     """
-    return {data_type: client.daily_rollup(data_type, date) for data_type in _RESPIRATORY_SPO2_TYPES}
+    return {data_type: client.get_daily_value(data_type, date) for data_type in _RESPIRATORY_SPO2_TYPES}
 
 
 @mcp.tool()
 def get_skin_temperature(date: str) -> dict:
-    """Get a day's skin temperature and sleep temperature derivation data.
+    """Get a day's sleep temperature derivation data (relative skin temperature
+    variation overnight — the Fitbit Air has no absolute-temperature readout).
 
     Args:
         date: ISO date, e.g. "2026-09-03".
     """
-    return {data_type: client.daily_rollup(data_type, date) for data_type in _SKIN_TEMPERATURE_TYPES}
+    return client.get_daily_value(models.DAILY_SLEEP_TEMPERATURE_DERIVATIONS, date)
 
 
 @mcp.tool()

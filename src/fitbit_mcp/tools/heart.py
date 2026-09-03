@@ -12,10 +12,10 @@ def get_heart_summary(date: str) -> dict:
         date: ISO date, e.g. "2026-09-03".
     """
     return {
-        models.DAILY_RESTING_HEART_RATE: client.daily_rollup(
+        models.DAILY_RESTING_HEART_RATE: client.get_daily_value(
             models.DAILY_RESTING_HEART_RATE, date
         ),
-        models.DAILY_HEART_RATE_VARIABILITY: client.daily_rollup(
+        models.DAILY_HEART_RATE_VARIABILITY: client.get_daily_value(
             models.DAILY_HEART_RATE_VARIABILITY, date
         ),
     }
@@ -31,8 +31,10 @@ def get_intraday_heart_rate(start_time: str, end_time: str, bucket_width: str = 
         bucket_width: Aggregation bucket, e.g. "300s" for 5-minute buckets.
     """
     return {
-        models.HEART_RATE: client.rollup(models.HEART_RATE, start_time, end_time, bucket_width),
-        models.HEART_RATE_VARIABILITY: client.rollup(
+        models.HEART_RATE: client.get_intraday_series(
+            models.HEART_RATE, start_time, end_time, bucket_width
+        ),
+        models.HEART_RATE_VARIABILITY: client.get_intraday_series(
             models.HEART_RATE_VARIABILITY, start_time, end_time, bucket_width
         ),
     }

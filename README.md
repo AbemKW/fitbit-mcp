@@ -61,6 +61,11 @@ No write tools (`create`/`patch`/`batchDelete`) — this integration observes, i
 
 `batchGet` (multi-type single request) isn't shipped by Google yet (tracked for Q2 2026); every tool above makes one request per data type under the hood.
 
+Live-verified against a real authorized account (Sep 2026) — several things the docs don't spell out anywhere, discovered empirically:
+- `dailyRollUp`/`rollUp` only work for types with a "RollupValue" response shape (`models.ROLLUP_CAPABLE_TYPES` — steps, distance, active minutes/zone minutes, sedentary period, swim lengths, heart rate, run VO2 max, total calories). Everything else 400s on those endpoints with `"but the following actions are supported: list, reconcile"` — the client auto-falls-back to `list()` for those (`client.get_daily_value` / `client.get_intraday_series`).
+- `list()`'s `filter` query param uses a per-data-type member path (`{type}.sample_time.physical_time`, `{type}.interval.start_time`, or `{type}.date` depending on the type) that isn't documented with concrete examples anywhere — wrong guesses 400. Only bothered mapping this for the handful of types this project actually filters by time; everything else calls `list()` unfiltered (bounded by `pageSize`) rather than risk a wrong filter string.
+- Two data types the device-compatibility page lists in plain English — "Respiratory Rate" and "Skin Temperature" — are **not real, independently queryable data type IDs**. Only `daily-respiratory-rate` and `daily-sleep-temperature-derivations` actually exist.
+
 ## TODO
 
 - **Nutrition logging** (`nutrition-log`, `food-measurement-unit`) — the Fitbit Air supports these via the Fitbit app's manual food log, but no tool is wired up since nothing's being logged yet. Add `get_nutrition_log(date)` if that changes.
