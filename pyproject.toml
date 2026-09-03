@@ -1,0 +1,32 @@
+[project]
+name = "fitbit-mcp"
+version = "0.1.0"
+description = "Google Health API (Fitbit Air) as a stdio MCP server — read-only activity, heart, vitals, and sleep data."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Abem Woldesenbet" }]
+requires-python = ">=3.10"
+keywords = ["mcp", "model-context-protocol", "fitbit", "google-health", "health", "fitness"]
+classifiers = [
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "mcp>=2.0",
+    "google-auth>=2.30",
+    "requests>=2.32",
+    "keyring>=25.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fitbit_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

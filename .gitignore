@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# OAuth client credentials downloaded from Google Cloud Console — never commit
+client_secret*.json
+.env
