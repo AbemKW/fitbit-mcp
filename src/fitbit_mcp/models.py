@@ -43,6 +43,9 @@ VO2_MAX = "vo2-max"
 RUN_VO2_MAX = "run-vo2-max"
 DAILY_VO2_MAX = "daily-vo2-max"
 
+# Body
+WEIGHT = "weight"
+
 # Sleep
 SLEEP = "sleep"
 
@@ -72,6 +75,7 @@ ALL_DATA_TYPES = [
     RUN_VO2_MAX,
     DAILY_VO2_MAX,
     SLEEP,
+    WEIGHT,
 ]
 
 # Filter shape for users.dataTypes.dataPoints.list, confirmed empirically —
@@ -112,4 +116,5 @@ DATA_TYPE_FILTER_SHAPES = {
     SWIM_LENGTHS_DATA: FILTER_INTERVAL,
     EXERCISE: FILTER_NONE,
     SLEEP: FILTER_NONE,
+    WEIGHT: FILTER_SAMPLE,
 }

@@ -15,7 +15,7 @@ def list_data_points(data_type: str, start_time: str, end_time: str, page_size: 
     daily-heart-rate-variability, oxygen-saturation, daily-oxygen-saturation,
     daily-respiratory-rate, respiratory-rate-sleep-summary,
     daily-sleep-temperature-derivations, vo2-max, run-vo2-max,
-    daily-vo2-max, sleep.
+    daily-vo2-max, sleep, weight.
 
     Note: total-calories only supports rollup/dailyRollUp, not list — use
     get_daily_activity for it instead.
